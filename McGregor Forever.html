@@ -1,0 +1,514 @@
+<html>
+  <head>
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet">
+
+<!-- STYLE DEL ACORDION -->
+    <style>
+body{
+background-color:#000000;
+font-family:'Roboto Condensed', sans-serif;
+color:#fff;margin:0 0 70px 0;padding:0!important;
+height:100%;
+display:inline-block;
+width:100%;
+width:-moz-available;
+width:-webkit-fill-available;
+width:fill-available;
+}
+ * {
+	 box-sizing: border-box;
+}
+ .logo {
+	 display: flex;
+	 margin: 10px;
+	 flex-direction: row;
+	 z-index: 1000;
+}
+ .logo a {
+	 display: block;
+	 height: 30px;
+	 width: auto;
+	 cursor: pointer;
+	 margin-right: 10px;
+}
+ .logo a img {
+	 height: 100%;
+	 width: auto;
+}
+ .container {
+	 display: flex;
+	 flex-direction: column;
+	 width: 100%;
+	 max-width: 100%;
+	 margin: 0 auto;
+    margin-top: -40px;
+}
+ .container h1 {
+	 text-align: center;
+	 margin-bottom: 30px;
+	 font-weight: 500;
+}
+ .container h2 {
+	 font-weight: 500;
+}
+ .accordion {
+	 display: flex;
+	 flex-direction: column;
+	 width: 100%;
+	 height: auto;
+}
+ .accordion .a-container {
+	 display: flex;
+	 flex-direction: column;
+	 width: 100%;
+	 padding-bottom: 5px;
+}
+ .accordion .a-container .a-btn {
+	 margin: 0;
+	 position: relative;
+	 padding: 15px 30px;
+	 width: 100%;
+	 color: #bdbdbd;
+	 font-weight: 400;
+	 display: block;
+	 font-weight: 500;
+	 background-color: #101018;
+	 cursor: pointer;
+	 transition: all 0.3s ease-in-out;
+	 border-radius: 5px;
+	 box-shadow: 0 20px 25px -5px rgba(0, 0, 0, .15), 0 10px 10px -5px rgba(0, 0, 0, .1) !important;
+}
+ .accordion .a-container .a-btn span {
+	 display: block;
+	 position: absolute;
+	 height: 14px;
+	 width: 14px;
+	 right: 20px;
+	 top: 18px;
+}
+ .accordion .a-container .a-btn span:after {
+	 content: '';
+	 width: 14px;
+	 height: 3px;
+	 border-radius: 2px;
+	 background-color: #fff;
+	 position: absolute;
+	 top: 6px;
+}
+ .accordion .a-container .a-btn span:before {
+	 content: '';
+	 width: 14px;
+	 height: 3px;
+	 border-radius: 2px;
+	 background-color: #fff;
+	 position: absolute;
+	 top: 6px;
+	 transform: rotate(90deg);
+	 transition: all 0.3s ease-in-out;
+}
+ .accordion .a-container .a-panel {
+	 width: 100%;
+	 color: #fff;
+	 transition: all 0.2s ease-in-out;
+	 opacity: 0;
+	 height: auto;
+	 max-height: 0;
+	 overflow: hidden;
+	 padding: 0px 10px;
+}
+ .accordion .a-container.active .a-btn {
+	 color: red;
+}
+ .accordion .a-container.active .a-btn span::before {
+	 transform: rotate(0deg);
+}
+ .accordion .a-container.active .a-panel {
+	 padding: 15px 10px 10px 10px;
+	 opacity: 1;
+	 max-height: 500px;
+}      
+    </style>
+
+<!-- BANNER -->
+<style> 
+.Wallpaper{width:410px;height:210px;padding:0 0 30% 0;background-size:100%;background-repeat:no-repeat;background-color:#181821;border-radius:0px;}
+
+.xs img{width:110px;height:135px;margin-top:-159px;padding:10px;}
+.titulo{color:fff;margin-top:-100px;text-align:left;margin-left:120px;font-size:15px;line-height:19px}
+@media screen and (max-width:600px) 
+.SingleContent h1{font-size: 27px;top: 0;}
+.Wallpaper{padding: 0 0 45% 0;}
+@media screen and (max-width:380px) 
+.Wallpaper{padding: 0 0 55% 0;}
+.sinopsis{margin-top:-20px;padding:10px;}
+info{background:transparent;color:green;font-family:'PT Sans', sans-serif;left:0;right:0;height:2.5em;display:flex;flex-direction:row;align-items:center;justify-content:space-between;text-decoration:none;cursor:pointer;}
+info,a{color:fff;font-size:18px;margin-top:45px;}
+</style>
+
+<style > 
+.fs-abrir-lightbox{
+background: linear-gradient(to bottom, #414142, #040404);
+	width:100%; 	
+}
+#lightbox {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  background: rgba(0, 0, 0, 0.8);
+  display: none;
+}
+
+#lightbox.abrir {
+  display: block;
+}
+
+#lightbox-content {
+  position: absolute;
+  width: 95%;
+  height: 50vh;
+ border-radius:5px;
+
+  top: 22%;
+  margin-left: 2.4%;
+background: black;
+  text-align: center;
+  padding-top: 0px;
+}
+
+#fechar {
+  position: absolute;
+  right: 0;
+  top: -60px;
+    font-size: 35px;
+  height: 20px;
+  width: 20px;
+  text-align: center;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+@media(orientation:landscape){
+#lightbox-content {
+  height: 70vh;
+  top: 15%;
+}
+
+#fechar {
+  top: -50px;
+  font-size: 40px;
+}
+
+}
+</style>
+
+
+    <style>
+*, *::after, *::before {
+	 padding: 0;
+	 margin: 0;
+	 box-sizing: border-box;
+	 list-style: none;
+	 list-style-type: none;
+	 text-decoration: none;
+	 text-rendering: optimizeLegibility;
+}
+
+ .container {
+	 max-width: 100%;
+	 width: 100%;
+	 height: auto;
+	 margin: 0  auto;
+	overflow :auto;
+	
+}
+ .main .accordion {
+  position: relative;
+  background: white;
+  height: auto ;
+  font-size: 1rem;
+  text-align: justify;
+  line-height: inherit;
+  width: 100%;
+  overflow: hidden;
+  transition: 0.5s; 
+  line-height: 0.35em;
+}
+
+ .main .accordion-item {
+	 padding: 0.3rem 0;
+	 margin: 0;
+	 overflow: hidden;
+	 border: none;
+	 outline: none;
+	 border-bottom: 1px solid #d4d4d4;
+     background-color: #101018;
+
+}
+ .main .accordion-item .title {
+	 display: flex;
+	 justify-content: space-between;
+	 align-items: center;
+	 font-family: inherit;
+	 font-size: 0.8rem;
+	 font-weight: 600;
+	 line-height: inherit;
+	 cursor: pointer;
+	 color: #fff;
+     margin-left: 5px;
+     
+    
+}
+ .main .accordion-item .title i.fas {
+	 font-size: 0.8rem;
+	 color: #FF0000;
+	 transform: translateX(-50%) rotate(0);
+	 transition: transform 0.15s ease;
+	
+	
+}
+ .main .accordion-item .paragraph {
+	 font-family: inherit;
+	 font-size: 0.8rem;
+	 font-weight: normal;
+	 line-height: 0.35em;
+	 color: #fff;
+	 display: none;
+	 padding: 0rem 0;
+     background-color: #101018;
+}
+ .main .accordion-item.active .title i.fas {
+	 color: #1a9de1;
+	 transform: translateX(-50%) rotate(180deg);
+         content:"\f078"
+}
+ .main .accordion-item.active .paragraph {
+	 display: block;
+} 
+
+a {text-decoration:none; 
+ background-color: #686868; 
+  display: block; 
+ line-height: 33px;
+ color: white;
+ border-radius: 5px;
+ font-size: 15px;
+ margin: 0px;
+    margin-top: 4px;
+text-align: center;
+} 
+</style>
+
+  </head>
+  <body>
+
+ 
+
+
+<div class="Wallpaper" style="background-image: linear-gradient(rgba(41, 128, 185, 0), rgb(0, 0, 50)), url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQXegtyCjwOkLWnyl95sPkSriBQNJ-igPNQw&usqp=CAU);"></div></div></div>
+<div class="ConjuntoHeadCont">
+</div></div>
+<div class="xs">
+<img  src="https://www.flixcorn.com/uploads/Pongamos-que-hablo-de-la-ruta-del-bakalao699.jpg" style="border-radius:15px; width:115px;height:160px"border="">
+
+
+<div class="titulo">
+<span> Pongamos que hablo de La Ruta del Bakalao </span><br>
+<span style="color:red;">Género:</b> <h9 style="color:#fff;">documental</9></span><br>
+3 episodios</span>
+</div>
+<info style="background:#101018;">
+<i></i>
+<i style="color:red;padding:7px;text-align: justify;line-height:18px;" class="fal fa-calendar-alt"><h9 style="font-size:14;"> Año: 2023</h9></i>
+<i style="color:red;padding:7px;text-align: justify;line-height:18px;" class="fal fa-film"><h9 style="font-size:14;"> 1 Temporada</h9></i>
+<i style="color:red;padding:7px;text-align: justify;line-height:18px;" class="fal fa-thumbs-up"><h9 style="font-size:14;"> 20%</h9></i>
+<i></i>
+</info><br>
+<h3 style="color:red;padding:7px;text-align: justify;line-height:23px;">SINOPSIS</h3>
+<p style="color:#fff;padding:7px;text-align: justify;line-height:18px;">
+Presentada por Iñaki López, esta serie documental repasa la historia de un movimiento cultural sin precedentes en nuestro país: la movida valenciana, un fenómeno sociológico que a pesar de nacer en la periferia de la península logró cambiar los hábitos del ocio de varias generaciones de españoles.
+</p>
+
+
+<div class="container">
+  <div class="accordion v1">
+    <div class="a-container">
+      <p class="a-btn">Temporada 1<span></span></p>
+      <div class="a-panel">
+<main class="main">
+  <div class="container">
+    <div class="accordion">
+      <div class="accordion-item">
+        <h3 class="title">
+          <span>Capitulo 1</span>
+          <i class="fas fa-chevron-down"></i>
+        </h3>
+        <p class="paragraph">
+   <a class="fs-abrir-lightbox" 
+<div video id="video1" onClick="playPause();">
+<video width="390" height="190" controls controlsList=""oncontextmenu="return false" onselectstart="return false" ondragstart="return       false"poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQXegtyCjwOkLWnyl95sPkSriBQNJ-igPNQw&usqp=CAU" width="100%">
+      <source src="https://onedrive.live.com/download?cid=F5B8BEF483E98AED&resid=F5B8BEF483E98AED%211512&authkey=AEmzeZUZUemtwqE"type="video/mp4"></span></a> 
+        </p>
+      </div>
+      <div class="accordion-item">
+        <h3 class="title">
+          <span>Capitulo 2</span>
+          <i class="fas fa-chevron-down"></i>
+        </h3>
+        <p class="paragraph">
+   <a class="fs-abrir-lightbox" <div video id="video1" onClick="playPause();">
+<video width="390" height="190" controls controlsList=""oncontextmenu="return false" onselectstart="return false" ondragstart="return       false"poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQXegtyCjwOkLWnyl95sPkSriBQNJ-igPNQw&usqp=CAU" width="100%">
+      <source src="https://onedrive.live.com/download?cid=F5B8BEF483E98AED&resid=F5B8BEF483E98AED%211513&authkey=ADBcBV2-_VUtBnk"type="video/mp4"></span></a> 
+        </p>
+      </div>
+      <div class="accordion-item">
+        <h3 class="title">
+          <span>Capitulo 3</span>
+          <i class="fas fa-chevron-down"></i>
+        </h3>
+        <p class="paragraph">
+  <a class="fs-abrir-lightbox" <div video id="video1" onClick="playPause();">
+<video width="390" height="190" controls controlsList=""oncontextmenu="return false" onselectstart="return false" ondragstart="return       false"poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQXegtyCjwOkLWnyl95sPkSriBQNJ-igPNQw&usqp=CAU" width="100%">
+<source src="https://onedrive.live.com/download?cid=F5B8BEF483E98AED&resid=F5B8BEF483E98AED%211514&authkey=AMZDubKHkxeWxpo"type="video/mp4"></span></a>
+        </p>
+      </div>
+ 
+     
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</main>
+
+      </div>
+    </div>    
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</main>
+
+      </div>
+    </div>
+
+  </div>
+
+
+
+<div id="lightbox">
+  <div id="lightbox-content">
+    <div id="fechar">× </div>
+  </div>
+</div>
+
+<!-- STYLE DEL REPRODUCTOR -->
+<link rel="stylesheet" href="https://cdn.plyr.io/3.6.8/plyr.css"/>
+       <style>*{margin:0;padding:0;box-sizing:border-box;font-family:Montserrat,sans-serif;text-decoration:none;color:#fff;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}*,:focus{outline:0}body{background:#000000}video{width:100%;height:auto}#video_player{max-width:600px;margin:0 auto}.Luispool{display:grid;grid-template-columns:repeat(2,1fr);grid-gap:1rem;margin:1rem 0;padding:0 1rem}.Luispool a{display:flex;justify-content:center;align-items:center;padding:50px 1rem;font-size:20px;color:#fafafa;border-radius:20px;box-shadow:0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);position:relative;background:rgba(0,0,0,.55);overflow:hidden;text-align:center}.Luispool a::after{content:'';position:absolute;display:block;width:100%;height:100%;background:url(https://www.udrop.com/file/66YU/Portadaxsplus.jpg);background-size:cover;background-position:center center;opacity:.8;z-index:-1}h2{margin:.7rem 1rem}#titulo{color:var(--plyr-color-main)}:root{--plyr-color-main:#0033FF}</style>   
+</head>
+<body>
+
+
+<script>
+      
+
+function initAcc(elem, option){
+    document.addEventListener('click', function (e) {
+        if (!e.target.matches(elem+' .a-btn')) return;
+        else{
+            if(!e.target.parentElement.classList.contains('active')){
+                if(option==true){
+                    var elementList = document.querySelectorAll(elem+' .a-container');
+                    Array.prototype.forEach.call(elementList, function (e) {
+                        e.classList.remove('active');
+                    });
+                }            
+                e.target.parentElement.classList.add('active');
+            }else{
+                e.target.parentElement.classList.remove('active');
+            }
+        }
+    });
+}
+
+initAcc('.accordion.v1', true);
+initAcc('.accordion.v2', false);
+      
+
+
+// Accordion Action
+const accordionItem = document.querySelectorAll(".accordion-item");
+
+accordionItem.forEach((el) =>
+  el.addEventListener("click", () => {
+    if (el.classList.contains("active")) {
+      el.classList.remove("active");
+    } else {
+      accordionItem.forEach((el2) => el2.classList.remove("active"));
+      el.classList.add("active");
+    }
+  })
+);
+
+
+const fs_BotoesLightbox = document.querySelectorAll(".fs-abrir-lightbox");
+  
+if(fs_BotoesLightbox){
+  for (var i=0; i < fs_BotoesLightbox.length; i++) {
+    fs_BotoesLightbox[i].onclick = function(fs_VideoAtual){
+      const fs_VideoLightbox = fs_VideoAtual.currentTarget.getAttribute('data-video');
+      
+      const fs_UrlVideo = "" + fs_VideoLightbox;    
+      
+      const fs_ContentVideo = document.querySelector("#lightbox-content")
+
+      fs_ContentVideo.innerHTML += '<iframe id="video-adicionado" width="100%" height="100%" sandbox="allow-same-origin allow-scripts" scrolling="no" style="  border-radius:5px;" src="'+ fs_UrlVideo +'" frameborder="0" allowfullscreen></iframe>';
+        
+      document.querySelector("#lightbox").className = "abrir";
+    }
+  }
+}
+
+
+// document.getElementById("fechar").addEventListener("click", function(e) {
+//   document.getElementById("lightbox").className = "";
+//   document.getElementById("video-adicionado").remove();
+// });
+
+document.querySelector("#lightbox").addEventListener("click", function(e) {
+  if (e.target.id == "fechar") {
+    document.querySelector("#lightbox").className = "";
+    document.querySelector("#video-adicionado").remove();
+  }
+});
+
+
+document.querySelector("#lightbox").addEventListener("click", function(e) {
+  if (e.target.id == "lightbox") {
+    document.querySelector("#lightbox").className = "";
+    document.querySelector("#video-adicionado").remove();
+  }
+});
+
+    </script>
